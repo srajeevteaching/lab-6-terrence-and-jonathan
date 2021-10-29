@@ -37,11 +37,11 @@ def find_x_coordinate(min, max, message):
 # Defining the function used to get a random color value used to change color of ball
 def random_color():
     # Storing random values between 0-255 into their proper variables
-    r = random.randint(0, 255)
-    g = random.randint(0, 255)
-    b = random.randint(0, 255)
+    red = random.randint(0, 255)
+    green = random.randint(0, 255)
+    blue = random.randint(0, 255)
     # Storing random rgb values into rgb array
-    rgb = [r, g, b]
+    rgb = [red, green, blue]
     # Storing the rgb value as a string into a variable
     random_color_string = color_rgb(rgb[0], rgb[1], rgb[2])
     return random_color_string
@@ -49,7 +49,7 @@ def random_color():
 
 def main():
     # User input to find the beginning x coordinate
-    starting_x_coordinate = find_x_coordinate(50, 450, "What is your starting point? (50-450): ")
+    starting_x_coordinate = find_x_coordinate(50, 450, "What is your starting point? (50-450, 250 is for diamond shape): ")
 
     # Initializing starting values
     height = 500
