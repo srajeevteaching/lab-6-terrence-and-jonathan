@@ -18,20 +18,26 @@ def make_circle(x, y, r):
 
 
 # Defining the function to get user input
-def find_x_coordinate(min, max, message):
-    # Getting user input and validating if input entered is integer
-    message_input = input(message)
-    while message_input.isdigit() != True and message_input.isdecimal() != True:
+def find_x_coordinate(minimum, maximum, message):
+    # Initializing necessary variables
+    is_valid = False
+    return_message = None
+    # Checks to see if input value is between the minimum and maximum ranges
+    while not is_valid:
+        print("Please Enter a value between " + str(minimum) + " and " + str(maximum))
+        # Getting user input
         message_input = input(message)
-    message_input = int(message_input)
-
-    # Checking to see if the user input is allowed depending on the max and min of the window
-    if message_input <= max and message_input >= min:
-        return message_input
-    elif message_input > max or message_input < min:
-        # Recursively calls itself if the input does not match the range of inputs
-        find_x_coordinate(min, max, message_input)
-    return message_input
+        # Validating if input entered is integer
+        while not message_input.isdigit():
+            print("Please enter an integer value only (numbers only)")
+            message_input = input(message)
+        # Converts the users input from string to an integer using typecasting
+        message_input = int(message_input)
+        # Updates validation variable to check if user input value is between the proper range
+        is_valid = message_input in range(minimum, maximum)
+        # Assigns the value of the users input message to a variable of greater scope
+        return_message = message_input
+    return return_message
 
 
 # Defining the function used to get a random color value used to change color of ball
@@ -49,8 +55,8 @@ def random_color():
 
 def main():
     # User input to find the beginning x coordinate
-    starting_x_coordinate = find_x_coordinate(50, 450, "What is your starting point? (50-450, 250 is for diamond shape): ")
-
+    starting_x_coordinate = find_x_coordinate(50, 450, "What is your starting point? (250 is for diamond shape): ")
+    print("\nValue has been accepted!")
     # Initializing starting values
     height = 500
     width = 500
@@ -73,10 +79,10 @@ def main():
     circle.draw(window)
 
     # Will begin moving the circle once the program begins to run
-    while window.checkMouse() == None:
+    while window.checkMouse() is None:
         while True:
             # Begins moving the circle to the right and down by the starting values (1)
-            circle.move(x_movement,y_movement)
+            circle.move(x_movement, y_movement)
 
             # When the ball is touching the top or bottom border it will change to the inverse of the y movement value
             if circle.getCenter().getY() <= bottom_border or circle.getCenter().getY() >= top_border:
@@ -95,5 +101,3 @@ def main():
 
 
 main()
-
-
